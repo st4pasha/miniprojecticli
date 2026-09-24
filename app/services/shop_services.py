@@ -1,30 +1,25 @@
-Products = [
-    {"title": "молоко", "price": 100}, 
-    {"title": "чипсы", "price": 80}, 
-    {"title": "хлеб", "price": 50}
-    ]
+from app.models.product import products
+from app.models.basket import basket
+from app.models.order import orders
 
-basket = []
-orders = []
-
-def GetProducts():
+def get_products():
     print("Доступные товары: ")
-    for i in range(len(Products)):
-        print(f"{i + 1}: {Products[i]["title"]}, цена: {Products[i]["price"]}")
+    for i in range(len(products)):
+        print(f"{i + 1}: {products[i]["title"]}, цена: {products[i]["price"]}")
 
-def addToBasket(title: str):
-    for product in Products:
+def add_to_basket(title: str):
+    for product in products:
         if product["title"] == title:
             basket.append(product)
             return f"Товар: {title} добавлен в корзину."
     return f"Товар с названием {title} в магазине не найден."
 
-def GetProductFromBasket():
+def get_products_from_basket():
     print("Товары в корзине: ")
     for product in basket:
         print(f"Название: {product["title"]}, цена {product["price"]}")
 
-def DoOrder(title: str):
+def do_order(title: str):
     for product in basket:
         if product["title"] == title:
             orders.append(product)
@@ -33,7 +28,7 @@ def DoOrder(title: str):
 
     return f"Товар с названием {title} в корзине не найден"
 
-def GetOrders():
+def get_orders():
     print("Список заказов: ")
     for order in orders:
         print(f"Название товара: {order["title"]}, цена: {order["price"]}.")
