@@ -3,3 +3,4 @@ products = [
     {"title": "чипсы", "price": 80}, 
     {"title": "хлеб", "price": 50}
     ]
+
