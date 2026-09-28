@@ -1,14 +1,12 @@
-from app.models.product import products
-from app.models.basket import basket
-from app.models.order import orders
+from app.repositories.product_repositories import get_products_from_repositories, products
+from app.repositories.basket_repositories import basket, get_products_from_basket_from_repositories
+from app.repositories.order_repositories import orders, get_orders_from_repositories
 from app.models.product_class import Product
 from app.models.order_class import Order
 from uuid import uuid4
 
 def get_products():
-    print("Доступные товары: ")
-    for i in range(len(products)):
-        print(f"{i + 1}: {products[i]["title"]}, цена: {products[i]["price"]}")
+    return get_products_from_repositories()
 
 def add_to_basket(title: str):
     for product_item in products:
@@ -19,9 +17,7 @@ def add_to_basket(title: str):
     return f"Товар с названием {title} в магазине не найден."
 
 def get_products_from_basket():
-    print("Товары в корзине: ")
-    for product in basket:
-        print(f"Название: {product.title}, цена {product.price}")
+    return get_products_from_basket_from_repositories()
 
 def do_order(title: str):
     for product in basket:
@@ -35,6 +31,4 @@ def do_order(title: str):
     return f"Товар с названием {title} в корзине не найден"
 
 def get_orders():
-    print("Список заказов: ")
-    for order in orders:
-        print(f"Название товара: {order.title}, цена: {order.price}, ID: {order.id}")
+    return get_orders_from_repositories()

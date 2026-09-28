@@ -4,3 +4,5 @@ products = [
     {"title": "хлеб", "price": 50}
     ]
 
+def get_products_from_repositories():
+    return products
