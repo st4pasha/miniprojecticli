@@ -17,13 +17,11 @@ while True:
     if option == "1":
         cli.get_products()
     elif option == "2":
-        product_title = input("Введите название товара для добавления в корзину: ")
-        print(shop.add_to_basket(product_title))
+        cli.add_to_basket()
     elif option == "3":
         cli.get_products_from_basket()
     elif option == "4":
-        product_title = input("Введите название товара из корзины чтобы оформить заказ: ")
-        print(shop.do_order(product_title))
+        cli.do_order()
     elif option == "5":
         cli.get_orders()
     elif option == "6":

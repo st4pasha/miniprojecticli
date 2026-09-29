@@ -18,3 +18,12 @@ def get_orders():
     print("Список заказов: ")
     for order in orders:
         print(f"Название товара: {order.title}, цена: {order.price}, ID: {order.id}")
+
+def add_to_basket():
+    product_title = input("Введите название товара для добавления в корзину: ")
+    print(shop.add_to_basket(product_title))
+
+
+def do_order():
+    product_title = input("Введите название товара из корзины чтобы оформить заказ: ")
+    print(shop.do_order(product_title))
