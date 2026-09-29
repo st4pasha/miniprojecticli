@@ -1,3 +1,1 @@
-app.cli.__pycache__
-app.services.__pycache__
-app.models.__pycache__
+__pycache__/
