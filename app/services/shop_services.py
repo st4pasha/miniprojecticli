@@ -1,9 +1,7 @@
 from app.repositories.product_repositories import get_products_from_repositories, products
-from app.repositories.basket_repositories import basket, get_products_from_basket_from_repositories
-from app.repositories.order_repositories import orders, get_orders_from_repositories
-from app.models.product_class import Product
-from app.models.order_class import Order
 from uuid import uuid4
+from app.repositories.product_repositories import *
+from app.repositories.order_repositories import *
 
 def get_products():
     return get_products_from_repositories()
@@ -11,24 +9,31 @@ def get_products():
 def add_to_basket(title: str):
     for product_item in products:
         if product_item["title"] == title:
-            product_to_basket = Product(title=product_item["title"], price=float(product_item["price"]))
-            basket.append(product_to_basket)
+            product_title = product_item["title"]
+            product_price = product_item["price"]
+
+            product = create_product(product_title, float(product_price))
+            write_product_to_file(product)
+            
             return f"Товар: {title} добавлен в корзину."
+        
     return f"Товар с названием {title} в магазине не найден."
 
+
+
 def get_products_from_basket():
-    return get_products_from_basket_from_repositories()
+    return read_products_from_file()
 
 def do_order(title: str):
+
+    basket = read_products_from_file()
+
     for product in basket:
         if product.title == title:
-            product_to_order = Order(id=str(uuid4()), title=product.title, price=product.price)
-            orders.append(product_to_order)
-
-            basket.remove(product)
-            return f"Оформлен заказ продукта: {product_to_order.title}"
-
+            order = create_order(id=str(uuid4()), title=product.title, price=product.price)
+            write_order_to_file(order)
+            return f"Товар {title} добавлен в список заказов"
     return f"Товар с названием {title} в корзине не найден"
 
 def get_orders():
-    return get_orders_from_repositories()
+    return read_order_from_file()

@@ -16,8 +16,11 @@ def get_products_from_basket():
 def get_orders():
     orders = shop.get_orders()
     print("Список заказов: ")
-    for order in orders:
-        print(f"Название товара: {order.title}, цена: {order.price}, ID: {order.id}")
+    if orders != None:
+        for order in orders:
+            print(f"Название товара: {order.title}, цена: {order.price}, ID: {order.id}")
+    else:
+        print("Список заказов пуст.")
 
 def add_to_basket():
     product_title = input("Введите название товара для добавления в корзину: ")
