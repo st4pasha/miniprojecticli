@@ -1,6 +1,7 @@
 from app.models.order_class import Order
 from app.repositories.product_repositories import *
 from app.util import *
+from uuid import uuid4
 
 orders: list[Order] = []
 
@@ -9,8 +10,8 @@ ORDER_FILE_PATH = "app/data/order.csv"
 def get_orders_from_repositories():
     return orders
 
-def create_order(id: str, title: str, price: float):
-    return Order(id, title, price)
+def create_order(title: str, price: float):
+    return Order(id=str(uuid4()), title=title, price=price)
 
 def order_to_str(order: Order):
     lst = []
@@ -20,10 +21,6 @@ def order_to_str(order: Order):
     lst.append(str(order.price))
 
     return "|".join(lst)
-
-def write_order_to_file(order: Order):
-    with open(ORDER_FILE_PATH, "w") as file:
-        file.write(order_to_str(order) + "\n")
 
 def str_to_class(order_str: str):
     orders_str = order_str.split("|")
