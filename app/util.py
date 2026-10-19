@@ -5,7 +5,7 @@ def read_from_file(path: str) -> list[str]:
     
 def write_to_file(path: str, record_to_file: str):
     with open(path, "w") as file:
-        file.write(record_to_file + "\n")
+        file.write(record_to_file)
 
 
 

@@ -1,6 +1,10 @@
-from app.models.product_class import Product
+from app.util import read_from_file
 
-basket: list[Product] = []
-
-def get_products_from_basket_from_repositories():
-    return basket
+def parse_id(title: str):
+    from app.repositories.product_repositories import PRODUCTS_IN_SHOP_PATH, str_to_class
+    products_str = read_from_file(PRODUCTS_IN_SHOP_PATH)
+    for product_str in products_str:
+        product = str_to_class(product_str)
+        if product.title == title:
+            return product.id
+    raise ValueError

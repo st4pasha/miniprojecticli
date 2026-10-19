@@ -11,22 +11,22 @@ def get_products_from_basket():
     basket = shop.get_products_from_basket()
     print("Товары в корзине: ")
     for product in basket:
-        print(f"Название: {product.title}, цена {product.price}, айди: {product.id}")
+        print(f"ID: {product.id}: Название: {product.title}, цена {product.price}")
 
 def get_orders():
     orders = shop.get_orders()
     print("Список заказов: ")
     if orders != None:
         for order in orders:
-            print(f"Название товара: {order.title}, цена: {order.price}, ID: {order.id}")
+            print(f"ID: {order.id}, название товара: {order.title}, цена: {order.price}.")
     else:
         print("Список заказов пуст.")
 
 def add_to_basket():
-    product_title = input("Введите название товара для добавления в корзину: ")
-    print(shop.add_to_basket(product_title))
+    product_id = input("Введите айди товара для добавления в корзину: ")
+    print(shop.add_to_basket(product_id))
 
 
 def do_order():
-    product_title = input("Введите название товара из корзины чтобы оформить заказ: ")
-    print(shop.do_order(product_title))
+    product_id = input("Введите айди товара из корзины чтобы оформить заказ: ")
+    print(shop.do_order(product_id))
