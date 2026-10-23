@@ -1,7 +1,6 @@
 from app.models.order_class import Order
-from app.repositories.product_repositories import *
-from app.util import *
 from uuid import uuid4
+from app.util import read_from_file
 
 orders: list[Order] = []
 
