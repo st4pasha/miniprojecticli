@@ -1,0 +1,19 @@
+Table products_in_shop {
+  id integer
+  title varchar
+  price float
+}
+
+Table products_in_basket {
+  id integer
+  product_id integer
+}
+
+Enum post_status {
+  draft
+  published
+  private [note: 'visible via URL only']
+}
+
+Ref: products_in_basket.product_id > products_in_shop.id // many-to-one
+

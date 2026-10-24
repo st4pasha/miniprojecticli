@@ -1,34 +1,23 @@
-from app.repositories.product_repositories import get_products_from_repositories, products
-from app.repositories.basket_repositories import basket, get_products_from_basket_from_repositories
-from app.repositories.order_repositories import orders, get_orders_from_repositories
-from app.models.product_class import Product
-from app.models.order_class import Order
-from uuid import uuid4
+from app.repositories.product_repositories import get_products_from_repositories, read_products_from_basket, read_products_from_orders
+from app.repositories.order_repositories import add_product_to_orders
+from app.repositories.basket_repositories import add_product_to_basket
 
 def get_products():
     return get_products_from_repositories()
 
-def add_to_basket(title: str):
-    for product_item in products:
-        if product_item["title"] == title:
-            product_to_basket = Product(title=product_item["title"], price=float(product_item["price"]))
-            basket.append(product_to_basket)
-            return f"Товар: {title} добавлен в корзину."
-    return f"Товар с названием {title} в магазине не найден."
+def add_to_basket(id: str):
+    if add_product_to_basket(id):
+        return f"Продукт с айди: {id} успешно добавлен в корзину"
+    return f"Продукта с айди: {id} нет в магазине"
+
 
 def get_products_from_basket():
-    return get_products_from_basket_from_repositories()
+    return read_products_from_basket()
 
-def do_order(title: str):
-    for product in basket:
-        if product.title == title:
-            product_to_order = Order(id=str(uuid4()), title=product.title, price=product.price)
-            orders.append(product_to_order)
-
-            basket.remove(product)
-            return f"Оформлен заказ продукта: {product_to_order.title}"
-
-    return f"Товар с названием {title} в корзине не найден"
+def do_order(id: str):
+    if add_product_to_orders(id):
+        return f"Продукт с айди: {id} успешно заказан"
+    return f"Продукта с айди: {id} нет в корзине"
 
 def get_orders():
-    return get_orders_from_repositories()
+    return read_products_from_orders()
