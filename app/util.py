@@ -13,11 +13,6 @@ def parse_id(id: str):
     ids = id.split("|")
     return ids[1].strip()
 
-def get_product_id_from_file(parse: str):
 
-    ids = read_from_file(parse)[1::]
-    id = "|".join(ids)
-
-    return parse_id(id)
 
 
