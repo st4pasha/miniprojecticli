@@ -5,6 +5,7 @@ from app.models.order_class import Order
 ORDER_FILE_PATH = "app/data/order.csv"
 BASKET_FILE_PATH = "app/data/basket.csv"
 PRODUCTS_IN_SHOP_PATH = "app/data/products_in_shop.csv"
+colons = "id|product_id\n"
 
 def get_products_from_repositories():
 

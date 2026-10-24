@@ -1,7 +1,7 @@
 from app.models.order_class import Order
-from app.util import colons, write_to_file
+from app.util import write_to_file
 from uuid import uuid4
-from app.repositories.product_repositories import get_products_from_repositories, ORDER_FILE_PATH
+from app.repositories.product_repositories import get_products_from_repositories, ORDER_FILE_PATH, colons
 
 
 def add_product_to_orders(product_id: str):

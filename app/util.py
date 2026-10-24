@@ -1,5 +1,3 @@
-colons = "id|product_id\n"
-
 def read_from_file(path: str) -> list[str]:
     with open(path, "r") as file:
         str_from_file = file.readlines()

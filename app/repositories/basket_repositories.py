@@ -1,7 +1,6 @@
 from app.util import write_to_file
 from uuid import uuid4
-from app.util import colons
-from app.repositories.product_repositories import get_products_from_repositories, BASKET_FILE_PATH
+from app.repositories.product_repositories import get_products_from_repositories, BASKET_FILE_PATH, colons
 
 def add_product_to_basket(product_id: str):
 
