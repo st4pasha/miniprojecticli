@@ -1,5 +1,5 @@
-import app.services.shop_services as shop
-from app.cli import cli_handler as cli
+
+from app.cmd.cli import cli_handler as cli
 print("Добро пожаловать в магазин")
 commands = """Список команд:
 1.Отобразить список товаров.

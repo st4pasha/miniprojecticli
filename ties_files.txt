@@ -9,6 +9,11 @@ Table products_in_basket {
   product_id integer
 }
 
+Table products_in_orders {
+  id integer
+  product_id integer
+}
+
 Enum post_status {
   draft
   published
@@ -16,4 +21,4 @@ Enum post_status {
 }
 
 Ref: products_in_basket.product_id > products_in_shop.id // many-to-one
-
+Ref: products_in_orders.product_id > products_in_shop.id // many-to-one

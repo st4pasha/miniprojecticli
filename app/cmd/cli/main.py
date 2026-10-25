@@ -1,4 +1,4 @@
-import app.cli.shop_cli as cli_shop
+import app.cmd.cli.shop_cli as cli_shop
 
 def main():
     cli = cli_shop()
