@@ -10,7 +10,6 @@ def add_to_basket(id: str):
         return f"Продукт с айди: {id} успешно добавлен в корзину"
     return f"Продукта с айди: {id} нет в магазине"
 
-
 def get_products_from_basket():
     return read_products_from_basket()
 
