@@ -7,10 +7,9 @@ def write_to_file(path: str, record_to_file: str):
     with open(path, "w") as file:
         file.write(record_to_file)
 
-def parse_id(id: str):
-    ids = id.split("|")
-    return ids[1].strip()
-
+def parse_id(ids: list):
+    id = ids[1]
+    return id
 
 
 
