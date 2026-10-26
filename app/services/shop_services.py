@@ -1,6 +1,4 @@
-from app.repositories.product_repositories import get_products_from_repositories, read_products_from_basket, read_products_from_orders
-from app.repositories.order_repositories import add_product_to_orders
-from app.repositories.basket_repositories import add_product_to_basket
+from app.repositories.product_repositories import get_products_from_repositories, read_products_from_basket, read_products_from_orders, add_product_to_basket, add_product_to_orders
 
 def get_products():
     return get_products_from_repositories()

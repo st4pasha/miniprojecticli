@@ -1,15 +1,6 @@
-from app.util import write_to_file
-from uuid import uuid4
-from app.repositories.product_repositories import get_products_from_repositories, BASKET_FILE_PATH, colons
+import sqlite3
 
-def add_product_to_basket(product_id: str):
+basket_connection = sqlite3.connect("app/data/basket.db")
+basket_connection.execute("CREATE TABLE IF NOT EXISTS basket(id TEXT, product_id TEXT UNIQUE)")
+cursor_basket = basket_connection.cursor()
 
-    products = get_products_from_repositories()
-
-    for product in products:
-        if product.id == product_id:
-            str_to_file = f"{str(uuid4())}|{product_id}"
-            write_to_file(BASKET_FILE_PATH, (colons + str_to_file))
-            return True
-        
-    return False
