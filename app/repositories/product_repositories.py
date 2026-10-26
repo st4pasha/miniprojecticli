@@ -1,6 +1,9 @@
 from app.util import parse_id
 from app.models.product_class import Product
 import sqlite3
+from app.repositories.basket_repositories import basket_connection, cursor_basket
+from uuid import uuid4
+from app.repositories.order_repositories import order_connection, cursor_order
 
 ORDER_FILE_PATH = "app/data/order.csv"
 BASKET_FILE_PATH = "app/data/basket.csv"
@@ -10,6 +13,7 @@ colons = "id|product_id\n"
 product_connection = sqlite3.connect("app/data/product_in_shop.db")
 product_connection.execute("CREATE TABLE IF NOT EXISTS products_in_shop(id INT UNIQUE, title TEXT UNIQUE, price FLOAT)")
 cursor_product = product_connection.cursor()
+
 
 def get_products_from_repositories():
 
@@ -30,7 +34,18 @@ def get_products_from_repositories():
         products.append(product)
 
     return products
-  
+
+def add_product_to_basket(product_id: str):
+    products = get_products_from_repositories()
+
+    for product in products:
+        if product.id == product_id:
+            basket_connection.execute("INSERT INTO basket(id, product_id) VALUES (?, ?)", (str(uuid4()), product_id))
+            basket_connection.commit()
+            return True
+        
+    return False
+
 def product_to_str(product: Product) -> str:
     lst = [] # ['Хлеб', '50']
 
@@ -51,7 +66,6 @@ def str_to_class(product_str: str):
     return Product(id, title, price)
 
 def read_products_from_basket():
-    from app.repositories.basket_repositories import cursor_basket
     products: list[Product] = []
 
     cursor_basket.execute("SELECT * FROM basket")
@@ -66,8 +80,17 @@ def read_products_from_basket():
             products.append(product)
     return products
 
+def add_product_to_orders(product_id: str):
+
+    products = get_products_from_repositories()
+    for product in products:
+        if product.id == product_id:
+            order_connection.execute("INSERT INTO orders(id, product_id) VALUES(?, ?)", (str(uuid4()), product_id))
+            order_connection.commit()
+            return True
+    return False
+
 def read_products_from_orders():
-    from app.repositories.order_repositories import cursor_order
     products: list[Product] = []
     
     cursor_order.execute("SELECT * FROM orders")
